@@ -28,6 +28,11 @@ contract p2pTrade {
     }
 
     address payable prosumer;
+    uint receivedEnergy;
+
+    function readEnergy(uint meterReading) public onlyOwner{
+        receivedEnergy = meterReading;
+    }
 
     function placeOrder(address payable prosumerAdd, uint loadAmount) public onlyOwner{
         prosumer = prosumerAdd;
@@ -41,7 +46,7 @@ contract p2pTrade {
 
 
 
-    function checkEnergy(uint receivedEnergy) public onlyOwner{
+    function checkEnergy() public onlyOwner{
         if(receivedEnergy == load) {
             isEnergyRecieved =true;
             payout();
